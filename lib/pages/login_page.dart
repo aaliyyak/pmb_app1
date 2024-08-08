@@ -212,7 +212,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Sudah punya akun?",
+                    "Belum punya akun?",
                     style: blackTextstyle,
                   ),
                   GestureDetector(

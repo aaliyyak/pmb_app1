@@ -35,9 +35,8 @@ class OnboardingPage extends StatelessWidget {
                   height: 290,
                 ),
               ),
-              // Jarak antar elemen
               Text(
-                'Daftar kuliah lebih mudah dan cepat\ndi #PmbUIGM', // Teks deskripsi
+                'Daftar kuliah lebih mudah dan cepat\ndi #PMBUIGM', // Teks deskripsi
                 style: TextStyle(
                   color: Colors.blueGrey[100], // Warna teks
                   fontSize: 12, // Ukuran font

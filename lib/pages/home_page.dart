@@ -134,14 +134,14 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 10),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CircleAvatar(
-                          radius: 20,
+                          radius: 14,
                           child: Icon(Icons.person,
                               color: primaryColor,
-                              size: 30), // Menggunakan ikon default
+                              size: 26), // Menggunakan ikon default
                           backgroundColor:
                               Colors.grey, // Menambahkan warna latar belakang
                         ),
@@ -150,27 +150,36 @@ class _HomePageState extends State<HomePage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            SizedBox(
+                              height: 3,
+                            ),
                             Text(
                               "Hi, Ayu Cuantek",
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(height: 1),
-                            Text(
-                              "Selamat datang di #PmbUIGM",
-                              style: TextStyle(
-                                color: Colors.white54,
+                                color: lightColor,
                                 fontSize: 16,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ],
                         ),
                       ],
                     ),
-                    SizedBox(height: 50),
+                    SizedBox(height: 30),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Selamat Datang di PMBUIGM",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 6),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
@@ -181,21 +190,22 @@ class _HomePageState extends State<HomePage> {
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Cari Informasi Pendaftaran Mahasiswa Baru',
-                          hintStyle: TextStyle(fontSize: 12),
+                          hintStyle:
+                              TextStyle(color: Colors.grey, fontSize: 12),
                           filled: true,
                           fillColor: Colors.white,
                           prefixIcon: Icon(Icons.search, color: Colors.grey),
                           contentPadding:
-                              EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+                              EdgeInsets.symmetric(vertical: 1, horizontal: 8),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(30),
                             borderSide: BorderSide.none,
                           ),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 15),
+                      padding: EdgeInsets.symmetric(vertical: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -204,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                             'UIGM',
                             'Info fasilitas\nUniversitas',
                             'assets/build.jpg', // Updated
-                            38,
+                            40,
                             UIGMPage(),
                           ),
                           _buildFeatureCard(
@@ -212,7 +222,7 @@ class _HomePageState extends State<HomePage> {
                             'Agenda',
                             'Jadwal\nPendaftaran',
                             'assets/genda.jpg', // Updated
-                            38,
+                            40,
                             AgendaPage(),
                           ),
                           _buildFeatureCard(
@@ -220,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                             'PMB',
                             'Daftar Jadi\nMahasiswa',
                             'assets/minmin.jpg', // Updated
-                            38,
+                            45,
                             PmbPage(),
                           ),
                         ],
@@ -242,9 +252,11 @@ class _HomePageState extends State<HomePage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(
+                      height: 6,
+                    ),
                     _buildImageSlider(),
-                    SizedBox(height: 10),
+                    SizedBox(height: 5),
                     Text(
                       '  Berita Terkini',
                       style: TextStyle(
@@ -252,7 +264,7 @@ class _HomePageState extends State<HomePage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 6),
                     _buildNewsCard(
                       context,
                       'assets/impactR.jpeg',
@@ -314,13 +326,22 @@ class _HomePageState extends State<HomePage> {
         );
       },
       child: Container(
-        width: 100,
+        width: 96,
         child: Card(
           child: Padding(
             padding: EdgeInsets.all(10),
             child: Column(
               children: [
-                Image.asset(imagePath, width: iconSize, height: iconSize),
+                ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(10.0), // Border radius here
+                  child: Image.asset(
+                    imagePath,
+                    width: iconSize,
+                    height: iconSize,
+                    fit: BoxFit.cover, // Ensures the image covers the area
+                  ),
+                ),
                 SizedBox(height: 5),
                 Text(
                   title,
@@ -409,7 +430,7 @@ class _HomePageState extends State<HomePage> {
       },
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.only(top: 0),
+          padding: const EdgeInsets.only(top: 1),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -435,7 +456,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       TextSpan(
                         text:
-                            'Universitas Indo Global Mandiri Raih PTS Peringkat Pertama di Sumbagsel dan Peringkat 7 PTS se-Indonesia versi The Impact Rangkings 2023\n\n',
+                            '  Universitas Indo Global Mandiri Raih PTS Peringkat\n  Pertama di Sumbagsel dan Raih Peringkat 7 PTS\n  se-Indonesia versi The Impact Rangkings 2023\n\n',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontStyle: FontStyle.normal),
@@ -467,7 +488,7 @@ class _HomePageState extends State<HomePage> {
                 child: Padding(
                   padding: const EdgeInsets.only(
                       right: 20,
-                      bottom: 10), // Adjust the padding values as needed
+                      bottom: 6), // Adjust the padding values as needed
                   child: Text(
                     buttonText,
                     style: TextStyle(
