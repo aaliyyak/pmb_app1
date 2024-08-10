@@ -64,7 +64,7 @@ class _NotifikasiPageState extends State<NotifikasiPage> {
         elevation: 0,
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () {
             Navigator.of(context).pop();
           },

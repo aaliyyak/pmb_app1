@@ -12,10 +12,13 @@ class PmbPage extends StatefulWidget {
 class _PmbPageState extends State<PmbPage> {
   bool isSarjanaSelected = true;
 
-  Widget _buildContentBox(String title, String description, Color color,
-      String imageAsset, String programLabel) {
+  Widget _buildContentBox(
+      String title, //, String description,
+      Color color,
+      String imageAsset,
+      String programLabel) {
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: EdgeInsets.all(4),
       margin: EdgeInsets.symmetric(vertical: 3, horizontal: 4),
       decoration: BoxDecoration(
         color: color,
@@ -31,7 +34,7 @@ class _PmbPageState extends State<PmbPage> {
       child: Stack(
         children: [
           Positioned(
-            top: 0,
+            top: 1,
             left: 2,
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
@@ -53,26 +56,24 @@ class _PmbPageState extends State<PmbPage> {
           ),
           Row(
             children: [
-              SizedBox(width: 10),
+              SizedBox(width: 5),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 30), // Add spacing to avoid overlap
+                    SizedBox(height: 35), // Add spacing to avoid overlap
                     Text(
                       title,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 14,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 2),
-                    Text(
-                      description,
-                      style: TextStyle(fontSize: 14, color: Colors.white),
-                    ),
-                    SizedBox(height: 10),
+                    // SizedBox(height: 2),
+                    //Text(description,style: TextStyle(fontSize: 14, color: Colors.white),
+                    //),
+                    SizedBox(height: 3),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -94,7 +95,7 @@ class _PmbPageState extends State<PmbPage> {
                       child: Text(
                         'Lihat Program Studi',
                         style: TextStyle(
-                          fontSize: 10, // Smaller text size
+                          fontSize: 8, // Smaller text size
                           color: Colors.white,
                           fontWeight: FontWeight.bold, // Text color
                         ),
@@ -104,10 +105,10 @@ class _PmbPageState extends State<PmbPage> {
                 ),
               ),
               Container(
-                width: 120, // Fixed width to maintain box size
-                height: 120, // Fixed height to maintain box size
+                width: 110, // Fixed width to maintain box size
+                height: 100, // Fixed height to maintain box size
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(5),
                   child: Image.asset(
                     imageAsset,
                     fit: BoxFit.cover,
@@ -166,7 +167,7 @@ class _PmbPageState extends State<PmbPage> {
         centerTitle: true,
         toolbarHeight: 50,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -213,60 +214,42 @@ class _PmbPageState extends State<PmbPage> {
                 SizedBox(height: 20),
                 if (isSarjanaSelected) ...[
                   _buildContentBox(
-                    'Ilmu Komputer',
+                    'Fakultas Ilmu Komputer &\nSains',
+                    Colors.lightBlue.shade900,
+                    'assets/it3.png',
+                    'S1',
+                  ),
+                  _buildContentBox(
                     'Fakultas Teknik',
-                    Colors.purple,
-                    'assets/qwbb.jpg',
+                    Colors.blueGrey.shade800,
+                    'assets/Spil1.png',
+                    'S1',
+                  ),
+                  _buildContentBox('Fakultas Ekonomi', Colors.teal.shade300,
+                      'assets/Mn4.png', 'S1'),
+                  _buildContentBox(
+                    'Fakultas Ilmu Pemerintahan &\nBudaya Desain Komunikasi Visual',
+                    Colors.lightBlue.shade700,
+                    'assets/Ip3.png',
                     'S1',
                   ),
                   _buildContentBox(
-                    'Matematika',
-                    'Fakultas MIPA',
-                    Colors.teal,
-                    'assets/qww.jpg',
-                    'S1',
-                  ),
-                  _buildContentBox(
-                    'Akuntansi',
-                    'Fakultas Ekonomi',
-                    Colors.orange,
-                    'assets/qwr.jpg',
-                    'S1',
-                  ),
-                  _buildContentBox(
-                    'Psikologi',
-                    'Fakultas Psikologi',
-                    Colors.blue,
-                    'assets/ayor.jpg',
-                    'S1',
-                  ),
-                  _buildContentBox(
-                    'Teknologi Hasil Pertanian',
-                    'Fakultas Pertanian',
-                    Colors.red,
-                    'assets/qwb.jpg',
-                    'S1',
-                  ),
-                  _buildContentBox(
-                    'mencintai dia',
-                    'Fakultas cinta',
-                    secondaryColor,
-                    'assets/qwbb.jpg',
+                    'Fakultas Keguruan &\nIlmu Pendidikan',
+                    Colors.deepPurple.shade400,
+                    'assets/ttt11.png',
                     'S1',
                   ),
                 ] else ...[
                   _buildContentBox(
-                    'Magister Manajemen',
-                    'Fakultas Ekonomi',
-                    Colors.purple,
-                    'assets/5r.jpg',
+                    'Magister Ilmu Komputer',
+                    Colors.indigoAccent.shade200,
+                    'assets/Sk2.png',
                     'S2',
                   ),
                   _buildContentBox(
-                    'Magister Teknik Informatika',
-                    'Fakultas Teknik',
+                    'Magister Manajemen',
                     Colors.teal,
-                    'assets/5.jpg',
+                    'assets/Mn2.png',
                     'S2',
                   ),
                 ],

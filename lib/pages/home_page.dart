@@ -161,25 +161,23 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.normal,
                               ),
                             ),
+                            Column(
+                              children: [
+                                Text(
+                                  "Selamat Datang di PmbUIGM",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ],
                     ),
                     SizedBox(height: 30),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Selamat Datang di PMBUIGM",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 6),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
