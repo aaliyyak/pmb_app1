@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pmb_app/pages/product_detail.dart';
 import 'package:pmb_app/pages/splash_page.dart';
 
 void main() {
