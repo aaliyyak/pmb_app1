@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pmb_app/themes/themes.dart';
+import 'package:pmb_app/pages/product_detail.dart';
 
 class ProdiPage extends StatefulWidget {
   const ProdiPage({super.key});
@@ -71,7 +72,15 @@ class _ProdiPageState extends State<ProdiPage> {
                     ),
                     SizedBox(height: 10),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        // Navigate to ProductDetail page
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductDetail(),
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primaryColor, // Button color
                         padding: EdgeInsets.symmetric(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pmb_app/themes/themes.dart';
 import 'package:pmb_app/widget/product_widget.dart';
-import 'daftar_now_page.dart'; // Import the DaftarNowPage
+import 'daftar_now_page.dart'; // Import DaftarNowPage
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({super.key});
@@ -11,26 +11,25 @@ class ProductDetail extends StatefulWidget {
 }
 
 class _ProductDetailState extends State<ProductDetail> {
-  Color _buttonColor = abuColor;
-
   void _onButtonPressed() {
-    setState(() {
-      _buttonColor = primaryColor; // Change the button color to blue
-    });
+    // Aksi saat tombol "Daftar Sekarang" ditekan
     Navigator.push(
       context,
       MaterialPageRoute(
-          builder: (context) => DaftarNowPage()), // Navigate to DaftarNowPage
+        builder: (context) =>
+            DaftarNowPage(), // Pindah ke halaman DaftarNowPage
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: bgColor, // Mengatur warna latar belakang
       body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment
+              .stretch, // Menyusun elemen kolom agar memenuhi lebar secara horizontal
           children: [
             Stack(
               children: [
@@ -38,12 +37,12 @@ class _ProductDetailState extends State<ProductDetail> {
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.elliptical(220, 250),
                     bottomRight: Radius.elliptical(400, 250),
-                  ),
+                  ), // Mengatur border radius elips pada gambar
                   child: Image.asset(
                     "assets/it3r.jpg",
                     width: double.infinity,
-                    height: 350, // Set the desired height for the image
-                    fit: BoxFit.cover, // Ensure the image covers the container
+                    height: 350, // Menentukan tinggi gambar
+                    fit: BoxFit.cover, // Memastikan gambar sesuai dengan wadah
                   ),
                 ),
                 Positioned(
@@ -51,7 +50,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   left: 20,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pop(context); // Kembali ke layar sebelumnya
                     },
                     child: Icon(Icons.arrow_back_ios, color: Colors.white),
                   ),
@@ -62,10 +61,11 @@ class _ProductDetailState extends State<ProductDetail> {
                   right: 120,
                   child: Center(
                     child: Container(
-                      padding: EdgeInsets.all(6),
+                      padding: EdgeInsets.all(6), // Padding di dalam kontainer
                       decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(13),
+                        borderRadius: BorderRadius.circular(
+                            13), // Sudut melingkar dengan radius 13
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black26,
@@ -75,7 +75,8 @@ class _ProductDetailState extends State<ProductDetail> {
                         ],
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment
+                            .start, // Menyusun elemen secara horizontal di awal
                         children: [
                           Column(
                             children: [
@@ -97,7 +98,7 @@ class _ProductDetailState extends State<ProductDetail> {
                               ),
                             ],
                           ),
-                          SizedBox(width: 30),
+                          SizedBox(width: 30), // Jarak antara teks dan gambar
                           Image.asset(
                             "assets/Bbru.png",
                             width: 35,
@@ -110,7 +111,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
               ],
             ),
-            SizedBox(height: 18),
+            SizedBox(height: 18), // Jarak antara gambar dan bagian berikutnya
             _buildDecoratedSection(
               context: context,
               title: "Pilihan Kelas",
@@ -121,7 +122,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
               ),
             ),
-            SizedBox(height: 10), // Space between sections
+            SizedBox(height: 10), // Jarak antar bagian
             _buildDecoratedSection(
               context: context,
               title: "Deskripsi",
@@ -132,7 +133,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
               ),
             ),
-            SizedBox(height: 10), // Space between sections
+            SizedBox(height: 10), // Jarak antar bagian
             _buildDecoratedSection(
               context: context,
               title: "Kegiatan Mahasiswa",
@@ -143,12 +144,13 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
               ),
             ),
-            SizedBox(height: 10), // Space between sections
+            SizedBox(height: 10), // Jarak antar bagian
             _buildDecoratedSection(
               context: context,
               title: "Fasilitas",
               content: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment:
+                    MainAxisAlignment.spaceAround, // Mengatur jarak antar ikon
                 children: [
                   FacilityIcon(label: 'E-Learning', icon: Icons.laptop),
                   FacilityIcon(label: 'WiFi', icon: Icons.wifi),
@@ -159,28 +161,74 @@ class _ProductDetailState extends State<ProductDetail> {
                 ],
               ),
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 1.0, vertical: 20.0),
-              child: ElevatedButton(
-                onPressed: _onButtonPressed,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 8),
-                    Text(
-                      'DAFTAR SEKARANG',
-                      style: TextStyle(color: Colors.white),
+            SizedBox(height: 25), // Jarak antara Fasilitas dan tombol bawah
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        width: double.infinity, // Mengatur kontainer agar memenuhi lebar layar
+        height: 70, // Mengatur tinggi navigasi bawah
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(10.0), // Padding di sekitar tombol
+          child: Row(
+            children: [
+              Expanded(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    side: BorderSide(
+                        color: primaryColor,
+                        width: 2), // Warna border biru dengan lebar 2
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          10), // Sudut melingkar dengan radius 10
                     ),
-                  ],
-                ),
-                style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  backgroundColor: _buttonColor, // Use the dynamic button color
+                  ),
+                  onPressed: () {
+                    // Aksi saat tombol chat ditekan
+                    // Tambahkan logika di sini
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.chat, color: primaryColor), // Ikon chat
+                      SizedBox(width: 8), // Jarak antara ikon dan teks
+                      Text(
+                        "Chat",
+                        style: TextStyle(color: primaryColor),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(width: 10), // Jarak antara tombol chat dan tombol daftar
+              Expanded(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor:
+                        primaryColor, // Mengatur warna latar tombol "Daftar Sekarang"
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          10), // Sudut melingkar dengan radius 10
+                    ),
+                  ),
+                  onPressed: _onButtonPressed, // Aksi saat tombol ditekan
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 5,
+                      left: 15,
+                      right: 15,
+                    ), // Padding di dalam teks tombol
+                    child: Text(
+                      "Daftar Sekarang",
+                      style: whiteTextstyle, // Mengatur teks menjadi putih
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -193,22 +241,23 @@ class _ProductDetailState extends State<ProductDetail> {
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: whiteColor,
+        color: whiteColor, // Mengatur warna latar bagian
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
+            color: Colors.black12, // Mengatur warna bayangan
           ),
         ],
       ),
-      width: double.infinity,
+      width: double.infinity, // Mengatur bagian agar memenuhi lebar layar
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12.0), // Padding di dalam bagian
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment
+              .start, // Menyusun elemen kolom agar dimulai dari kiri
           children: [
-            SectionTitle(title: title),
-            SizedBox(height: 5),
-            content,
+            SectionTitle(title: title), // Judul bagian
+            SizedBox(height: 5), // Jarak antara judul dan konten
+            content, // Konten bagian
           ],
         ),
       ),
@@ -224,12 +273,13 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5.0),
+      padding: const EdgeInsets.symmetric(
+          vertical: 5.0), // Padding vertikal di sekitar judul
       child: Text(
         title,
         style: TextStyle(
           fontSize: 16,
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.bold, // Mengatur teks judul menjadi tebal
         ),
       ),
     );
@@ -246,9 +296,10 @@ class FacilityIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Icon(icon, size: 40),
-        SizedBox(height: 8),
-        Text(label, style: TextStyle(fontSize: 12)),
+        Icon(icon, size: 40), // Ukuran ikon diatur menjadi 40
+        SizedBox(height: 8), // Jarak antara ikon dan label
+        Text(label,
+            style: TextStyle(fontSize: 12)), // Teks label dengan ukuran font 12
       ],
     );
   }
