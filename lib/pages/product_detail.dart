@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pmb_app/pages/riwayat_page.dart';
 import 'package:pmb_app/themes/themes.dart';
 import 'package:pmb_app/widget/product_widget.dart';
-import 'daftar_now_page.dart'; // Import DaftarNowPage
+import 'cart_page.dart'; // Import DaftarNowPage
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({super.key});
@@ -16,8 +17,7 @@ class _ProductDetailState extends State<ProductDetail> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            DaftarNowPage(), // Pindah ke halaman DaftarNowPage
+        builder: (context) => RiwayatPage(), // Pindah ke halaman DaftarNowPage
       ),
     );
   }
@@ -35,19 +35,19 @@ class _ProductDetailState extends State<ProductDetail> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.elliptical(220, 250),
-                    bottomRight: Radius.elliptical(400, 250),
+                    bottomLeft: Radius.elliptical(190, 90),
+                    bottomRight: Radius.elliptical(440, 230),
                   ), // Mengatur border radius elips pada gambar
                   child: Image.asset(
                     "assets/it3r.jpg",
                     width: double.infinity,
-                    height: 350, // Menentukan tinggi gambar
+                    height: 340, // Menentukan tinggi gambar
                     fit: BoxFit.cover, // Memastikan gambar sesuai dengan wadah
                   ),
                 ),
                 Positioned(
                   top: 40,
-                  left: 20,
+                  left: 10,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.pop(context); // Kembali ke layar sebelumnya
@@ -57,7 +57,7 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
                 Positioned(
                   bottom: 0,
-                  left: 40,
+                  left: 15,
                   right: 120,
                   child: Center(
                     child: Container(
@@ -81,10 +81,10 @@ class _ProductDetailState extends State<ProductDetail> {
                           Column(
                             children: [
                               Text(
-                                "Teknik Informatika",
+                                "Program Studi Teknik Informatika",
                                 style: TextStyle(
                                   color: primaryColor,
-                                  fontSize: 14,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -92,13 +92,13 @@ class _ProductDetailState extends State<ProductDetail> {
                                 "S1",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 14,
+                                  fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(width: 30), // Jarak antara teks dan gambar
+                          SizedBox(width: 17), // Jarak antara teks dan gambar
                           Image.asset(
                             "assets/Bbru.png",
                             width: 35,
@@ -111,17 +111,43 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
               ],
             ),
-            SizedBox(height: 18), // Jarak antara gambar dan bagian berikutnya
+            SizedBox(height: 15),
             _buildDecoratedSection(
               context: context,
               title: "Pilihan Kelas",
-              content: Text(
-                "Reguler (Senin - Jumat 08:00 - 15:30 WIB)\nKaryawan R2 (Senin - Jumat 16:00 - 22:00 WIB)",
-                style: greyTextstyle.copyWith(
-                  fontWeight: FontWeight.w600,
-                ),
+              content: Column(
+                crossAxisAlignment:
+                    CrossAxisAlignment.start, // Menyusun elemen agar rata kiri
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.calendar_today, size: 20, color: Colors.grey),
+                      SizedBox(width: 8), // Jarak antara ikon dan teks
+                      Text(
+                        "Reguler (Senin - Jumat 08:00 - 15:30 WIB)",
+                        style: greyTextstyle.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 2), // Jarak antara dua baris
+                  Row(
+                    children: [
+                      // Icon(Icons.calendar_today, size: 20, color: Colors.grey),
+                      SizedBox(width: 28), // Jarak antara ikon dan teks
+                      Text(
+                        "Karyawan  (Senin - Jumat 16:00 - 22:00 WIB)",
+                        style: greyTextstyle.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
+
             SizedBox(height: 10), // Jarak antar bagian
             _buildDecoratedSection(
               context: context,
@@ -138,7 +164,7 @@ class _ProductDetailState extends State<ProductDetail> {
               context: context,
               title: "Kegiatan Mahasiswa",
               content: Text(
-                "Lomba ui&ux\n Lomba build app",
+                "Lomba ui&ux\nLomba build app",
                 style: greyTextstyle.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -155,9 +181,8 @@ class _ProductDetailState extends State<ProductDetail> {
                   FacilityIcon(label: 'E-Learning', icon: Icons.laptop),
                   FacilityIcon(label: 'WiFi', icon: Icons.wifi),
                   FacilityIcon(label: 'Laboratorium', icon: Icons.science),
-                  FacilityIcon(label: 'Mushola', icon: Icons.self_improvement),
-                  FacilityIcon(
-                      label: 'Perpustakaan', icon: Icons.library_books),
+                  FacilityIcon(label: 'Mushola', icon: Icons.mosque),
+                  FacilityIcon(label: 'Perpustakaan', icon: Icons.book),
                 ],
               ),
             ),
@@ -173,6 +198,32 @@ class _ProductDetailState extends State<ProductDetail> {
           padding: const EdgeInsets.all(10.0), // Padding di sekitar tombol
           child: Row(
             children: [
+              Expanded(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor:
+                        primaryColor, // Mengatur warna latar tombol "Daftar Sekarang"
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          10), // Sudut melingkar dengan radius 10
+                    ),
+                  ),
+                  onPressed: _onButtonPressed, // Aksi saat tombol ditekan
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 5,
+                      left: 15,
+                      right: 15,
+                    ), // Padding di dalam teks tombol
+                    child: Text(
+                      "+keranjang",
+                      style: whiteTextstyle, // Mengatur teks menjadi putih
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(width: 10), // Jarak antara tombol chat dan tombol daftar
               Expanded(
                 child: TextButton(
                   style: TextButton.styleFrom(
@@ -198,32 +249,6 @@ class _ProductDetailState extends State<ProductDetail> {
                         style: TextStyle(color: primaryColor),
                       ),
                     ],
-                  ),
-                ),
-              ),
-              SizedBox(width: 10), // Jarak antara tombol chat dan tombol daftar
-              Expanded(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor:
-                        primaryColor, // Mengatur warna latar tombol "Daftar Sekarang"
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10), // Sudut melingkar dengan radius 10
-                    ),
-                  ),
-                  onPressed: _onButtonPressed, // Aksi saat tombol ditekan
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 5,
-                      bottom: 5,
-                      left: 15,
-                      right: 15,
-                    ), // Padding di dalam teks tombol
-                    child: Text(
-                      "Daftar Sekarang",
-                      style: whiteTextstyle, // Mengatur teks menjadi putih
-                    ),
                   ),
                 ),
               ),
@@ -298,8 +323,10 @@ class FacilityIcon extends StatelessWidget {
       children: [
         Icon(icon, size: 40), // Ukuran ikon diatur menjadi 40
         SizedBox(height: 8), // Jarak antara ikon dan label
-        Text(label,
-            style: TextStyle(fontSize: 12)), // Teks label dengan ukuran font 12
+        Text(
+          label,
+          style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+        ),
       ],
     );
   }

@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:pmb_app/pages/cart_page.dart';
+import 'package:pmb_app/pages/daftarulang.dart';
 import 'package:pmb_app/pages/home_page.dart';
 import 'package:pmb_app/pages/notif.dart';
 import 'package:pmb_app/pages/profil_page.dart';
+import 'package:pmb_app/pages/waitVerif.dart';
+import 'package:pmb_app/themes/themes.dart';
 
 class RiwayatPage extends StatefulWidget {
   const RiwayatPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _RiwayatPageState createState() => _RiwayatPageState();
 }
 
 class _RiwayatPageState extends State<RiwayatPage> {
-  int _selectedIndex = 1; // Set the default selected index to "Riwayat" page
+  int _selectedIndex = 1;
   List<Color> _iconColors = [
     Colors.black,
     Colors.orange,
     Colors.black,
     Colors.black
   ];
-  int _tabIndex = 0; // Index to track selected tab
-  final Color primaryColor = Color(0xff0d3559); // Define your primary color
+  int _tabIndex = 0;
+  final Color primaryColor = Color(0xff0d3559);
   final PageController _pageController = PageController(initialPage: 0);
 
   void _onItemTapped(int index) {
@@ -59,68 +62,101 @@ class _RiwayatPageState extends State<RiwayatPage> {
     }
   }
 
-  Widget _buildStatusContainer(String status, Color color, IconData icon) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.grey),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 10,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey[300],
-                ),
-                child: Icon(icon, color: color, size: 30),
-              ),
-              SizedBox(width: 20),
-              Expanded(
-                child: Text(
-                  status,
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+  Widget _buildStatusContainer(String status, Color color, String assetName,
+      {VoidCallback? onPressed}) {
+    return GestureDetector(
+      onTap: onPressed, // Tambahkan aksi saat kotak status ditekan
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+        padding: EdgeInsets.all(8),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.white),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 110,
+                  height: 110,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      assetName,
+                      width: 110,
+                      height: 110,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 20), // Add space between text and button
-          ElevatedButton(
-            onPressed: () {
-              // Add any onTap functionality if needed
-            },
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: primaryColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
+                SizedBox(width: 15),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: 5),
+                      Text(
+                        "Prodi Teknik Informatika",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        "Kelas Reguler",
+                        style: TextStyle(
+                          color: Colors.grey[600],
+                          fontSize: 13,
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        "Rp 6.000.000",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        "S1",
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey[600],
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      Text(
+                        status,
+                        style: TextStyle(
+                          color: color,
+                          fontSize: 13, // Ukuran teks lebih kecil
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            child: Text(
-              status,
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -136,37 +172,27 @@ class _RiwayatPageState extends State<RiwayatPage> {
         });
       },
       child: Container(
-        padding: EdgeInsets.symmetric(
-            vertical: 10, horizontal: 40), // Adjusted padding
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 35),
         decoration: BoxDecoration(
-          gradient: isSelected
-              ? LinearGradient(
-                  colors: [Color(0xff0d3559), Color(0xff5691c8)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                )
-              : null,
-          color: isSelected ? null : Colors.transparent,
-          border: Border.all(
-            color: isSelected ? Colors.transparent : Colors.grey,
-            width: 2,
-          ),
+          color: isSelected ? primaryColor : Colors.grey[300],
           borderRadius: BorderRadius.circular(20),
           boxShadow: isSelected
               ? [
                   BoxShadow(
                     color: Colors.black26,
-                    blurRadius: 10,
+                    blurRadius: 8,
                     offset: Offset(0, 4),
                   ),
                 ]
               : [],
         ),
-        child: Text(
-          title,
-          style: TextStyle(
-            color: isSelected ? Colors.white : Colors.black,
-            fontWeight: FontWeight.bold,
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: isSelected ? Colors.white : Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
@@ -176,15 +202,15 @@ class _RiwayatPageState extends State<RiwayatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffd9d9d9),
+      backgroundColor: abuColor,
       appBar: AppBar(
         title: Text('Riwayat'),
-        backgroundColor: Color(0xffd9d9d9),
+        backgroundColor: Colors.white,
         elevation: 0,
+        toolbarHeight: 60,
         centerTitle: true,
-        toolbarHeight: 50,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.black),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -198,26 +224,27 @@ class _RiwayatPageState extends State<RiwayatPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 Container(
+                  padding: EdgeInsets.all(10),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           _buildTabButton("Dalam Proses", 0),
+                          SizedBox(width: 10), // Jarak antara tombol tab
                           _buildTabButton("Hasil Seleksi", 1),
                         ],
                       ),
-                      SizedBox(
-                          height: 20), // Add space between tabs and content
+                      SizedBox(height: 20),
                       Container(
-                        height: MediaQuery.of(context).size.height *
-                            0.6, // Adjust the height as needed
+                        height: MediaQuery.of(context).size.height * 0.6,
                         child: PageView(
                           controller: _pageController,
                           onPageChanged: (index) {
@@ -228,20 +255,49 @@ class _RiwayatPageState extends State<RiwayatPage> {
                           children: [
                             Column(
                               children: [
-                                _buildStatusContainer("Berkas Belum Lengkap",
-                                    Colors.red, Icons.error_outline),
-                                SizedBox(height: 20), // Add space between cards
-                                _buildStatusContainer("Menunggu Verifikasi",
-                                    Colors.yellow, Icons.hourglass_empty),
+                                _buildStatusContainer(
+                                  "Berkas Belum Lengkap",
+                                  Colors.red,
+                                  'assets/it3r.jpg',
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => CartPage()),
+                                    );
+                                  },
+                                ),
+                                SizedBox(
+                                    height: 5), // Jarak antara kotak status
+                                _buildStatusContainer(
+                                  "Menunggu Verifikasi",
+                                  Colors.yellow,
+                                  'assets/it3r.jpg',
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => VerifPage()),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                             Column(
                               children: [
-                                _buildStatusContainer("Pendaftaran Diterima",
-                                    Colors.green, Icons.check_circle_outline),
-                                SizedBox(height: 20), // Add space between cards
-                                _buildStatusContainer("Pendaftaran Ditolak",
-                                    Colors.grey, Icons.cancel_outlined),
+                                _buildStatusContainer(
+                                  "Pendaftaran Diterima",
+                                  Colors.green,
+                                  'assets/it3r.jpg',
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DaftarUlangPage()),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                           ],

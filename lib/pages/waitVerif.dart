@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pmb_app/themes/themes.dart';
 
-class DaftarNowPage extends StatelessWidget {
-  const DaftarNowPage({super.key});
+class VerifPage extends StatelessWidget {
+  const VerifPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: bgColor,
+      backgroundColor: abuColor,
       appBar: AppBar(
-        backgroundColor: lightColor,
+        backgroundColor: whiteColor,
       ),
     );
   }
