@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:pmb_app/pages/cart_page.dart';
+import 'package:pmb_app/pages/daftarriwayat.dart';
 import 'package:pmb_app/pages/daftarulang.dart';
 import 'package:pmb_app/pages/home_page.dart';
 import 'package:pmb_app/pages/notif.dart';
@@ -263,7 +264,8 @@ class _RiwayatPageState extends State<RiwayatPage> {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => CartPage()),
+                                          builder: (context) =>
+                                              DaftarRiwayat()),
                                     );
                                   },
                                 ),
@@ -271,7 +273,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                                     height: 5), // Jarak antara kotak status
                                 _buildStatusContainer(
                                   "Menunggu Verifikasi",
-                                  Colors.yellow,
+                                  Colors.orange,
                                   'assets/it3r.jpg',
                                   onPressed: () {
                                     Navigator.push(

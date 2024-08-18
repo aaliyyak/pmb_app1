@@ -17,7 +17,7 @@ class _ProductDetailState extends State<ProductDetail> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => RiwayatPage(), // Pindah ke halaman DaftarNowPage
+        builder: (context) => CartPage(), // Pindah ke halaman DaftarNowPage
       ),
     );
   }
@@ -217,7 +217,7 @@ class _ProductDetailState extends State<ProductDetail> {
                       right: 15,
                     ), // Padding di dalam teks tombol
                     child: Text(
-                      "+keranjang",
+                      "Daftar Sekarang",
                       style: whiteTextstyle, // Mengatur teks menjadi putih
                     ),
                   ),

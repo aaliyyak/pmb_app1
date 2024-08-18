@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // untuk Clipboard
 import 'package:pmb_app/pages/daftar_now_page.dart';
-import 'package:pmb_app/pages/riwayat_page.dart';
+//import 'package:pmb_app/pages/riwayat_page.dart';
 import 'package:pmb_app/themes/themes.dart';
 
 class CartPage extends StatelessWidget {
