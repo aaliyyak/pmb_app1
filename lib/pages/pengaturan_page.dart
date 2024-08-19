@@ -1,4 +1,6 @@
+import 'dart:io'; // Tambahkan import ini untuk File
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pmb_app/themes/themes.dart';
 
 class PengaturanPage extends StatefulWidget {
@@ -8,7 +10,7 @@ class PengaturanPage extends StatefulWidget {
   final String jenisKelamin;
   final String email;
 
-  PengaturanPage({
+  const PengaturanPage({
     required this.namaLengkap,
     required this.tempatLahir,
     required this.tanggalLahir,
@@ -17,11 +19,24 @@ class PengaturanPage extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _PengaturanPageState createState() => _PengaturanPageState();
 }
 
 class _PengaturanPageState extends State<PengaturanPage> {
+  XFile? _image; // Menyimpan gambar yang dipilih
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = pickedFile;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,9 +58,36 @@ class _PengaturanPageState extends State<PengaturanPage> {
         child: Column(
           children: [
             SizedBox(height: 20),
-            CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.grey,
+            Stack(
+              alignment: Alignment.bottomRight,
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.grey,
+                  backgroundImage:
+                      _image != null ? FileImage(File(_image!.path)) : null,
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                    width: 30, // Lebar container
+                    height: 30, // Tinggi container
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.black.withOpacity(
+                          0.3), // Background semi-transparan untuk ikon
+                    ),
+                    child: IconButton(
+                      icon: Icon(Icons.photo_camera,
+                          color: Colors.black, size: 16), // Ukuran ikon
+                      onPressed: _pickImage,
+                      padding: EdgeInsets
+                          .zero, // Menghapus padding default IconButton
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 20),
             TextField(
@@ -102,7 +144,7 @@ class _PengaturanPageState extends State<PengaturanPage> {
                 // Action for save button
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor,
+                backgroundColor: primaryColor, // Ganti dengan primaryColor Anda
                 minimumSize: Size(double.infinity, 50),
               ),
               child: Text(

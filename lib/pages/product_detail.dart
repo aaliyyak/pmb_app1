@@ -198,33 +198,7 @@ class _ProductDetailState extends State<ProductDetail> {
           padding: const EdgeInsets.all(10.0), // Padding di sekitar tombol
           child: Row(
             children: [
-              Expanded(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor:
-                        primaryColor, // Mengatur warna latar tombol "Daftar Sekarang"
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          10), // Sudut melingkar dengan radius 10
-                    ),
-                  ),
-                  onPressed: _onButtonPressed, // Aksi saat tombol ditekan
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 5,
-                      bottom: 5,
-                      left: 15,
-                      right: 15,
-                    ), // Padding di dalam teks tombol
-                    child: Text(
-                      "Daftar Sekarang",
-                      style: whiteTextstyle, // Mengatur teks menjadi putih
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 10), // Jarak antara tombol chat dan tombol daftar
-              Expanded(
+               Expanded(
                 child: TextButton(
                   style: TextButton.styleFrom(
                     side: BorderSide(
@@ -252,6 +226,34 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                 ),
               ),
+              SizedBox(width: 10),
+              Expanded(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor:
+                        primaryColor, // Mengatur warna latar tombol "Daftar Sekarang"
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          10), // Sudut melingkar dengan radius 10
+                    ),
+                  ),
+                  onPressed: _onButtonPressed, // Aksi saat tombol ditekan
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 5,
+                      bottom: 5,
+                      left: 15,
+                      right: 15,
+                    ), // Padding di dalam teks tombol
+                    child: Text(
+                      "Daftar Sekarang",
+                      style: whiteTextstyle, // Mengatur teks menjadi putih
+                    ),
+                  ),
+                ),
+              ),
+               // Jarak antara tombol chat dan tombol daftar
+
             ],
           ),
         ),
