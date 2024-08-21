@@ -166,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                                 Text(
                                   "Selamat Datang di PmbUIGM",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: lightColor,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),

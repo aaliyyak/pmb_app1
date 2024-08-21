@@ -51,6 +51,7 @@ dev_dependencies:
   curved_navigation_bar: ^1.0.6
   dots_indicator: ^2.1.2
   image_picker: ^0.8.7+4
+  rive: ^0.13.12
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

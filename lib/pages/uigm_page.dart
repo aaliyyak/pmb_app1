@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:pmb_app/pages/beasiswa.dart';
 import 'package:pmb_app/pages/biro.dart';
-
-import 'package:pmb_app/pages/fakultas_page.dart';
 import 'package:pmb_app/pages/organisasi.dart';
+import 'package:pmb_app/pages/tour_page.dart'; // Pastikan untuk mengimpor halaman tour.dart
 import 'package:pmb_app/themes/themes.dart';
 
-class UIGMPage extends StatelessWidget {
+class UIGMPage extends StatefulWidget {
+  @override
+  _UIGMPageState createState() => _UIGMPageState();
+}
+
+class _UIGMPageState extends State<UIGMPage>
+    with SingleTickerProviderStateMixin {
   final List<String> fields = [
     'Sejarah',
     'Visi & Misi',
     'Susunan Organisasi',
-    'Fakultas',
     'Fasilitas',
     'Biro',
     'Beasiswa',
@@ -27,6 +31,35 @@ class UIGMPage extends StatelessWidget {
     'Penghargaan':
         'Ini adalah teks penghargaan yang akan ditampilkan sebagai pop-up.',
   };
+
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
+  Offset position = Offset(20, 20);
+
+  @override
+  void initState() {
+    super.initState();
+    // Inisialisasi AnimationController dengan durasi 2 detik
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    )..repeat(reverse: true);
+    // Menggunakan Tween untuk membuat animasi dengan efek bounce
+    _animation = Tween<double>(begin: 0, end: 20).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.bounceInOut, // Menggunakan curve bounce
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    // Dispose AnimationController saat halaman dihancurkan
+    _animationController.dispose();
+    super.dispose();
+  }
 
   void navigateToPage(BuildContext context, String field) {
     if (fieldTexts.containsKey(field)) {
@@ -50,9 +83,6 @@ class UIGMPage extends StatelessWidget {
     } else if (field == 'Susunan Organisasi') {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => OrganisasiPage()));
-    } else if (field == 'Fakultas') {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => FakultasPage()));
     } else if (field == 'Biro') {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => BiroPage()));
@@ -66,66 +96,115 @@ class UIGMPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: abuColor,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Stack(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.elliptical(100, 250),
-                    bottomRight: Radius.elliptical(650, 250),
-                  ),
-                  child: Image.asset(
-                    "assets/uigm5.jpg",
-                    width: double.infinity,
-                    height: 250, // Set the desired height for the image
-                    fit: BoxFit.cover, // Ensure the image covers the container
+                Stack(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.elliptical(100, 250),
+                        bottomRight: Radius.elliptical(650, 250),
+                      ),
+                      child: Image.asset(
+                        "assets/uigm5.jpg",
+                        width: double.infinity,
+                        height: 270,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      top: 30,
+                      left: 16,
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Icon(Icons.arrow_back_ios, color: Colors.black),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 1,
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: Container(
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                blurRadius: 2,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Universitas",
+                                style: TextStyle(
+                                  color: redColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "Indo Global Mandiri",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 8),
+                Center(
+                  child: Text(
+                    'Motto "Your Success is Our Commitment"',
+                    style: TextStyle(
+                      color: Colors.grey[600],
+                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                    ),
                   ),
                 ),
+                SizedBox(height: 8),
                 Positioned(
-                  top: 30,
-                  left: 16,
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(Icons.arrow_back_ios, color: Colors.black),
-                  ),
-                ),
-                Positioned(
-                  bottom: 1,
+                  bottom: 0,
                   left: 0,
                   right: 0,
                   child: Center(
                     child: Container(
-                      padding: EdgeInsets.all(5),
+                      padding: EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey[600],
+                        borderRadius: BorderRadius.circular(8),
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black26,
-                            blurRadius: 5,
-                            offset: Offset(5, 5),
+                            blurRadius: 4,
+                            offset: Offset(2, 2),
                           ),
                         ],
                       ),
                       child: Column(
                         children: [
                           Text(
-                            "Universitas",
+                            'Akreditasi "Baik Sekali" oleh BAN-PT',
                             style: TextStyle(
-                              color: redColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            "Indo Global Mandiri",
-                            style: TextStyle(
-                              color: Colors.black,
+                              color: Colors.white,
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
@@ -133,97 +212,116 @@ class UIGMPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                  ),
+                ),
+                SizedBox(height: 60),
+                Padding(
+                  padding: const EdgeInsets.all(25),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: fields.map((field) {
+                      return GestureDetector(
+                        onTap: () {
+                          navigateToPage(context, field);
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 1),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                field,
+                                style: TextStyle(
+                                    fontSize: 17, color: Colors.grey[600]),
+                              ),
+                              Icon(Icons.arrow_forward_ios, color: Colors.grey),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
                   ),
                 ),
               ],
             ),
-            SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: Text(
-                'Motto "Your Success is Our Commitment"',
-                style: TextStyle(
-                  color: Colors.grey[600],
-                  fontSize: 16,
-                  fontStyle: FontStyle.italic,
+          ),
+          Positioned(
+            top: position.dy,
+            left: position.dx,
+            child: Draggable(
+              feedback: Container(
+                width: 140,
+                height: 110,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.transparent,
+                      blurRadius: 1,
+                      offset: Offset(2, 2),
+                    ),
+                  ],
+                ),
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/vtt.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Center(
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[600],
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        blurRadius: 4,
-                        offset: Offset(2, 2),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Akreditasi "Baik Sekali" oleh BAN-PT',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
+              childWhenDragging: Container(
+                width: 140,
+                height: 110,
+              ),
+              onDragEnd: (details) {
+                setState(() {
+                  position = details.offset;
+                });
+              },
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TourPage()),
+                  );
+                },
+                child: AnimatedBuilder(
+                  animation: _animation,
+                  builder: (context, child) {
+                    return Transform.translate(
+                      offset: Offset(0, _animation.value), // Efek bounce
+                      child: child,
+                    );
+                  },
+                  child: Container(
+                    width: 140,
+                    height: 110,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.transparent,
+                          blurRadius: 1,
+                          offset: Offset(2, 2),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: fields.map((field) {
-                  return GestureDetector(
-                    onTap: () {
-                      navigateToPage(context, field);
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 6),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 6),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            field,
-                            style: TextStyle(
-                                fontSize: 17, color: Colors.grey[600]),
-                          ),
-                          Icon(Icons.arrow_forward_ios, color: Colors.grey),
-                        ],
+                      ],
+                    ),
+                    child: ClipOval(
+                      child: Image.asset(
+                        'assets/vtt.png',
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  );
-                }).toList(),
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
