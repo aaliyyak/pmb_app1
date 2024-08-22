@@ -52,6 +52,7 @@ dev_dependencies:
   dots_indicator: ^2.1.2
   image_picker: ^0.8.7+4
   rive: ^0.13.12
+  url_launcher: ^6.0.20
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -3,6 +3,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:pmb_app/pages/cart_page.dart';
 import 'package:pmb_app/pages/daftarriwayat.dart';
 import 'package:pmb_app/pages/daftarulang.dart';
+import 'package:pmb_app/pages/detail_riwayat.dart';
 import 'package:pmb_app/pages/home_page.dart';
 import 'package:pmb_app/pages/notif.dart';
 import 'package:pmb_app/pages/profil_page.dart';
@@ -111,7 +112,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                     children: [
                       SizedBox(height: 5),
                       Text(
-                        "Prodi Teknik Informatika",
+                        "S1 Prodi Teknik Informatika",
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.black,
@@ -120,7 +121,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        "Kelas Reguler",
+                        "Siti Ayu Hermaliah",
                         style: TextStyle(
                           color: Colors.grey[600],
                           fontSize: 13,
@@ -128,7 +129,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        "Rp 6.000.000",
+                        "No.Pendaftaran : 123444",
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey[600],
@@ -296,7 +297,7 @@ class _RiwayatPageState extends State<RiwayatPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              DaftarUlangPage()),
+                                              DetailRiwayat()),
                                     );
                                   },
                                 ),

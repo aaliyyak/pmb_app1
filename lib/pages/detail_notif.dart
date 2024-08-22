@@ -1,179 +1,211 @@
 import 'package:flutter/material.dart';
 import 'package:pmb_app/themes/themes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DetailNotif extends StatelessWidget {
   const DetailNotif({super.key});
+
+  // Fungsi untuk membuka URL
+  void _launchURL() async {
+    const url = 'https://student.uigm.ac.id/';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.grey),
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pop(context);
           },
         ),
-        title: Text("Detail Notifikasi"),
+        title: Text('Detail Notifikasi'),
         centerTitle: true,
       ),
-      body: SafeArea(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-                height: 30), // Adjust the spacing from the app bar to the image
-            Center(
-              child: Column(
-                children: [
-                  Container(
-                    width: 65, // Set the width of the image
-                    height: 65, // Set the height of the image
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage(
-                            'assets/chat.jpeg'), // Path to your image asset
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+              height: 30,
+            ),
+            Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.green,
                   ),
-                  SizedBox(height: 5), // Gap between the image and the text
-                  Text(
-                    "Menunggu Verifikasi",
+                  child: Icon(
+                    Icons.chat,
+                    color: Colors.white,
+                  ),
+                ),
+                SizedBox(width: 12), // Perlebar jarak antara avatar dan teks
+                Expanded(
+                  child: Text(
+                    'Daftar Ulangmu sudah diverifikasi',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20), // Gap between the text and the box
-                  Container(
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      // borderRadius: BorderRadius.circular(10),
-                      //boxShadow: [
-                      //BoxShadow(
-                      //color: Colors.grey.withOpacity(0.5),
-                      //spreadRadius: 2,
-                      //blurRadius: 5,
-                      //offset: Offset(0, 3), // changes position of shadow
-                      //),
-                      //],
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Detail Berkas:",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Pendaftaran Ulang kamu sudah di verifikasi, silahkan lanjutkan proses pendaftaran dengan melakukan pembayaran ke rekening yang ditentukan. Pastikan data kamu sudah benar.',
+                  style: TextStyle(fontSize: 14),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            // BoxDecoration for "Program Sarjana (S1)"
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.all(5), // Add padding inside the box
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Program Sarjana (S1)',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(height: 10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("KTP"),
-                            Text("Tersedia"),
-                          ],
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        'Fakultas Ilmu Komputer dan Sains',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
                         ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("KK"),
-                            Text("Tersedia"),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Ijazah"),
-                            Text("Tersedia"),
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Nama Calon Mahasiswa",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "Siti Ayu Hermaliah",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "Email",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "ayucuantek1@gmail.com",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          "No. Handphone",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "081325456809",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
+                  Text(
+                    'Teknik Informatika',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
+            ),
+
+            SizedBox(height: 8),
+            // BoxDecoration for "NIM" and "Password" section
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'NIM',
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                    Text(
+                      '2021110088',
+                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Password',
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                    Text(
+                      '2021110088',
+                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Nama Mahasiswa',
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                    Text(
+                      'Siti Ayu Hermaliah',
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
+                    ),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Text(
+                      'Kelas Karyawan',
+                      style: TextStyle(color: Colors.black, fontSize: 14),
+                    ),
+                    Text(
+                      'Senin-Jumat 18:30-21:00',
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 5),
+            Divider(
+              color: Colors.grey,
+              thickness: 0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Masuk ke website ',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: _launchURL,
+                  child: Text(
+                    'https://student.uigm.ac.id/',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.blue,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Gunakan NIM dan Password yang tertera di atas untuk mengecek informasi lebih lanjut dan mengisi KRS',
+              style: TextStyle(fontSize: 14),
             ),
           ],
         ),

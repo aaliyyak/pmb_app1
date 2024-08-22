@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pmb_app/pages/daftarulang.dart';
 import 'package:pmb_app/themes/themes.dart';
 
-class VerifPage extends StatelessWidget {
-  const VerifPage({super.key});
+class DetailRiwayat extends StatelessWidget {
+  const DetailRiwayat({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,32 +25,33 @@ class VerifPage extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 30,
+              height: 20,
             ), // Adjust the spacing from the app bar to the image
             Center(
               child: Column(
                 children: [
                   Container(
-                    width: 65, // Set the width of the image
-                    height: 65, // Set the height of the image
+                    width: 75, // Set the width of the image
+                    height: 75, // Set the height of the image
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: AssetImage(
-                            'assets/Ve.png'), // Path to your image asset
-                        fit: BoxFit.cover,
-                      ),
+                      color: Colors.green, // Warna latar belakang lingkaran
+                      shape: BoxShape.circle, // Membuat bentuk lingkaran
+                    ),
+                    child: Icon(
+                      Icons.check, // Ikon ceklis
+                      color: Colors.white, // Warna ikon
+                      size: 40, // Ukuran ikon
                     ),
                   ),
                   SizedBox(height: 5), // Gap between the image and the text
                   Text(
-                    "Menunggu Verifikasi",
+                    "Selamat! Kamu Diterima",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20), // Gap between the text and the box
+                  SizedBox(height: 25), // Gap between the text and the box
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.all(16),
@@ -100,8 +102,10 @@ class VerifPage extends StatelessWidget {
                           children: [
                             Text(
                               "Teknik Informatika",
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 18),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 18,
+                              ),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
@@ -114,7 +118,7 @@ class VerifPage extends StatelessWidget {
                                   height: 2,
                                 ),
                                 Text(
-                                  "10 September 2023, 18:25",
+                                  "10 September 2023  18:25",
                                   style: TextStyle(color: Colors.grey),
                                 ),
                               ],
@@ -194,6 +198,35 @@ class VerifPage extends StatelessWidget {
                           ),
                         ),
                       ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 110,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DaftarUlangPage()),
+                      );
+                      // Implementasi logika ketika tombol ditekan
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor, // Warna background tombol
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 130, vertical: 13), // Padding tombol
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10), // Sudut tombol
+                      ),
+                    ),
+                    child: Text(
+                      "Daftar Ulang",
+                      style: TextStyle(
+                        color: Colors.white, // Warna teks
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

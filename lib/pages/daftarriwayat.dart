@@ -60,7 +60,7 @@ class DaftarRiwayat extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Detail Berkas:",
+                          "Detail Pendaftaran",
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -70,24 +70,55 @@ class DaftarRiwayat extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("KTP"),
-                            Text("Tersedia"),
+                            Text(
+                              "Pogram Sarjana(S1)",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                            Text(
+                              "No. Pendaftaran",
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 2),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Fakultas Ilmu Komputer",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            Text(
+                              "123456",
+                              style: TextStyle(color: Colors.grey),
+                            ),
                           ],
                         ),
                         SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("KK"),
-                            Text("Tersedia"),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Ijazah"),
-                            Text("Tersedia"),
+                            Text(
+                              "Teknik Informatika",
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 18),
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  "Waktu Pendaftaran",
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                SizedBox(
+                                  height: 2,
+                                ),
+                                Text(
+                                  "10 September 2023, 18:25",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ],
