@@ -57,8 +57,8 @@ class _ProductDetailState extends State<ProductDetail> {
                 ),
                 Positioned(
                   bottom: 0,
-                  left: 15,
-                  right: 120,
+                  left: 10,
+                  right: 110,
                   child: Center(
                     child: Container(
                       padding: EdgeInsets.all(6), // Padding di dalam kontainer
@@ -84,7 +84,7 @@ class _ProductDetailState extends State<ProductDetail> {
                                 "Program Studi Teknik Informatika",
                                 style: TextStyle(
                                   color: primaryColor,
-                                  fontSize: 10,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -198,7 +198,7 @@ class _ProductDetailState extends State<ProductDetail> {
           padding: const EdgeInsets.all(10.0), // Padding di sekitar tombol
           child: Row(
             children: [
-               Expanded(
+              Expanded(
                 child: TextButton(
                   style: TextButton.styleFrom(
                     side: BorderSide(
@@ -252,8 +252,7 @@ class _ProductDetailState extends State<ProductDetail> {
                   ),
                 ),
               ),
-               // Jarak antara tombol chat dan tombol daftar
-
+              // Jarak antara tombol chat dan tombol daftar
             ],
           ),
         ),

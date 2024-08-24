@@ -45,14 +45,15 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.2
   page_transition: ^2.1.0
   flutter_neumorphic: ^3.2.0
   curved_navigation_bar: ^1.0.6
   dots_indicator: ^2.1.2
-  image_picker: ^0.8.7+4
+  image_picker: ^0.8.9
   rive: ^0.13.12
   url_launcher: ^6.0.20
+  open_file: ^3.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
