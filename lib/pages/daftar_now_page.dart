@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:pmb_app/pages/daftar.dart';
 import 'package:pmb_app/themes/themes.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:open_file/open_file.dart';
@@ -7,7 +8,44 @@ import 'package:open_file/open_file.dart';
 //import 'package:path_provider/path_provider.dart';
 
 class DaftarNowPage extends StatefulWidget {
-  const DaftarNowPage({super.key});
+  const DaftarNowPage({
+    super.key,
+    required this.nama,
+    required this.jenjang,
+    required this.imageUrl,
+    required this.biayaUKT,
+    required this.namaLengkap,
+    required this.tempatLahir,
+    required this.tanggalLahir,
+    required this.alamat,
+    required this.namaSekolah,
+    required this.jurusan,
+    required this.tahunLulus,
+    required this.pilihanKelas,
+    required this.ukJaket,
+    required this.noHp,
+    required this.email,
+    required this.namaOrtu,
+    required this.penghasilan,
+    required this.pekerjaanOrtu,
+  });
+
+  final String namaLengkap,
+      tempatLahir,
+      tanggalLahir,
+      alamat,
+      namaSekolah,
+      jurusan,
+      tahunLulus,
+      pilihanKelas,
+      ukJaket,
+      noHp,
+      email,
+      namaOrtu,
+      penghasilan,
+      pekerjaanOrtu;
+
+  final String nama, jenjang, imageUrl, biayaUKT;
 
   @override
   State<DaftarNowPage> createState() => _DaftarNowPageState();
@@ -17,9 +55,6 @@ class _DaftarNowPageState extends State<DaftarNowPage> {
   TextEditingController namaLengkap = TextEditingController();
   TextEditingController tempatLahir = TextEditingController();
   TextEditingController tanggalLahir = TextEditingController();
-  String? jenisKelamin;
-  String? agama;
-  String? statusSipil;
   String? pilihanKelas;
   String? ukJaket;
   TextEditingController alamat = TextEditingController();
@@ -28,19 +63,10 @@ class _DaftarNowPageState extends State<DaftarNowPage> {
   TextEditingController namaSekolah = TextEditingController();
   TextEditingController jurusan = TextEditingController();
   TextEditingController tahunLulus = TextEditingController();
+  TextEditingController namaOrtu = TextEditingController();
   TextEditingController pekerjaanOrtu = TextEditingController();
   TextEditingController penghasilan = TextEditingController();
 
-  List<String> jenisKelaminOptions = ['Laki-laki', 'Perempuan'];
-  List<String> agamaOptions = [
-    'Islam',
-    'Kristen',
-    'Katolik',
-    'Hindu',
-    'Buddha',
-    'Konghucu'
-  ];
-  List<String> statusSipilOptions = ['Belum Menikah', 'Sudah Menikah'];
   List<String> pilihanKelasOptions = ['Reguler', 'Karyawan'];
   List<String> ukJaketOptions = ['S', 'M', 'L', 'XL', 'XXL'];
 
@@ -155,6 +181,10 @@ class _DaftarNowPageState extends State<DaftarNowPage> {
                         style: blackTextstyle.copyWith(
                             fontWeight: FontWeight.w600),
                       ),
+                      //Text(
+                      // "Biaya UKT: ${widget.biayaUKT}",
+                      //style: greyTextstyle,
+                      //  ),
                       Text(
                         "S1",
                         style: greyTextstyle,
@@ -282,111 +312,6 @@ class _DaftarNowPageState extends State<DaftarNowPage> {
                         borderSide: BorderSide(color: borderColor),
                       ),
                       hintText: "Masukkan Tanggal Lahir",
-                      hintStyle: greyTextstyle,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Jenis Kelamin",
-                    style: blackTextstyle.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  DropdownButtonFormField<String>(
-                    value: jenisKelamin,
-                    items: jenisKelaminOptions.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        jenisKelamin = newValue;
-                      });
-                    },
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: borderColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: borderColor),
-                      ),
-                      hintText: "Pilih Jenis Kelamin",
-                      hintStyle: greyTextstyle,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Agama",
-                    style: blackTextstyle.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  DropdownButtonFormField<String>(
-                    value: agama,
-                    items: agamaOptions.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        agama = newValue;
-                      });
-                    },
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: borderColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: borderColor),
-                      ),
-                      hintText: "Pilih Agama",
-                      hintStyle: greyTextstyle,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Status Sipil",
-                    style: blackTextstyle.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  DropdownButtonFormField<String>(
-                    value: statusSipil,
-                    items: statusSipilOptions.map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        statusSipil = newValue;
-                      });
-                    },
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: borderColor),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5),
-                        borderSide: BorderSide(color: borderColor),
-                      ),
-                      hintText: "Pilih Status Sipil",
                       hintStyle: greyTextstyle,
                     ),
                   ),
@@ -576,7 +501,7 @@ class _DaftarNowPageState extends State<DaftarNowPage> {
                     ),
                   ),
                   TextFormField(
-                    controller: namaLengkap,
+                    controller: namaOrtu,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -686,7 +611,7 @@ class _DaftarNowPageState extends State<DaftarNowPage> {
                     }).toList(),
                     onChanged: (newValue) {
                       setState(() {
-                        statusSipil = newValue;
+                        pilihanKelas = newValue;
                       });
                     },
                     decoration: InputDecoration(
@@ -721,7 +646,7 @@ class _DaftarNowPageState extends State<DaftarNowPage> {
                     }).toList(),
                     onChanged: (newValue) {
                       setState(() {
-                        statusSipil = newValue;
+                        ukJaket = newValue;
                       });
                     },
                     decoration: InputDecoration(
@@ -809,27 +734,50 @@ class _DaftarNowPageState extends State<DaftarNowPage> {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                // Simpan semua data atau navigasi ke halaman berikutnya
-                // Implementasikan logika penyimpanan data di sini
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CheckoutPage(
+                      nama: widget.nama,
+                      jenjang: widget.jenjang,
+                      imageUrl: widget.imageUrl,
+                      namaLengkap: namaLengkap.text,
+                      tempatLahir: tempatLahir.text,
+                      tanggalLahir: tanggalLahir.text,
+                      alamat: alamat.text,
+                      namaSekolah: namaSekolah.text,
+                      jurusan: jurusan.text,
+                      tahunLulus: tahunLulus.text,
+                      pilihanKelas: pilihanKelas ?? '',
+                      ukJaket: ukJaket ?? '',
+                      noHp: noHp.text,
+                      email: email.text,
+                      biayaUKT: widget.biayaUKT,
+                      namaOrtu: namaOrtu.text,
+                      penghasilan: penghasilan.text,
+                      pekerjaanOrtu: pekerjaanOrtu.text,
+                    ),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor, // Warna background tombol
-                padding: EdgeInsets.symmetric(
-                    horizontal: 130, vertical: 13), // Padding tombol
+                backgroundColor: primaryColor,
+                padding: EdgeInsets.symmetric(horizontal: 130, vertical: 13),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Sudut tombol
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
               child: Text(
-                "Simpan",
+                "Konfirmasi",
                 style: TextStyle(
-                  color: Colors.white, // Warna teks
+                  color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ),
+
           SizedBox(
             height: 20,
           ),

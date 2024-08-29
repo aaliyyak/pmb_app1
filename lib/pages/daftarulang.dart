@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // untuk Clipboard
+import 'package:pmb_app/pages/konfirm.dart';
 //import 'package:pmb_app/pages/daftar_now_page.dart';
 import 'package:pmb_app/themes/themes.dart';
 
@@ -63,48 +64,21 @@ class DaftarUlangPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Prosedur Pendaftaran Mahasiswa Baru : ",
+                    "Prosedur Pendaftaran Ulang Mahasiswa Baru : ",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: 5,
                   ),
                   Text(
-                    '1. Upload Berkas untuk verifikasi yaitu:',
+                    '1. Upload Bukti Transfer Pembayaran UKT',
                     style: TextStyle(fontSize: 15),
-                    textAlign: TextAlign.justify,
                   ),
                   SizedBox(
                     height: 5,
                   ),
-                  Text.rich(
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text:
-                              '  Scan ijazah SMA/SMK/Sederajat, Scan Transkip Nilai Raport/Nilai Ijazah',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                        ),
-                        TextSpan(
-                          text: '  Scan KTP dan KK, PasFoto Warna (3 x 4),',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                        ),
-                        TextSpan(
-                          text: '  Scan Bukti Bayar Biaya Pendaftaran.',
-                          style: TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    textAlign: TextAlign.justify,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
                   Text(
-                    '2. Melakukan Pembayaran Form Registrasi\ndengan Ketentuan berikut :',
+                    '2. Melakukan Pembayaran UKT\ndengan Ketentuan berikut :',
                     style: TextStyle(fontSize: 15),
                   ),
                   SizedBox(
@@ -120,7 +94,7 @@ class DaftarUlangPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '(Sarjana Mahasiswa Baru)',
+                        '(Kelas Reguler)',
                         style: TextStyle(fontSize: 13, color: Colors.black),
                       ),
                     ],
@@ -135,7 +109,7 @@ class DaftarUlangPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '(PascaSarjana)',
+                        '(Kelas Karyawan)',
                         style: TextStyle(fontSize: 13, color: Colors.black),
                       ),
                     ],
@@ -184,14 +158,20 @@ class DaftarUlangPage extends StatelessWidget {
             Spacer(),
             ElevatedButton(
               onPressed: () {
-                // Implementasi navigasi ke halaman berikutnya
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        KonfirmPage(), // Ganti dengan nama kelas halaman chat
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: primaryColor, // Warna background tombol
                 minimumSize: Size(double.infinity, 50),
               ),
               child: Text(
-                'Mulai Daftar Ulang',
+                'Mulai',
                 style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),

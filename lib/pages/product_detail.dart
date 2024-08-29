@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pmb_app/pages/riwayat_page.dart';
+import 'package:pmb_app/pages/chat.dart';
+//import 'package:pmb_app/pages/riwayat_page.dart';
 import 'package:pmb_app/themes/themes.dart';
-import 'package:pmb_app/widget/product_widget.dart';
-import 'cart_page.dart'; // Import DaftarNowPage
+//import 'package:pmb_app/widget/product_widget.dart';
+import 'cart_page.dart';
+import 'package:url_launcher/url_launcher.dart'; // Import DaftarNowPage
 
 class ProductDetail extends StatefulWidget {
   const ProductDetail({super.key});
@@ -20,6 +22,14 @@ class _ProductDetailState extends State<ProductDetail> {
         builder: (context) => CartPage(), // Pindah ke halaman DaftarNowPage
       ),
     );
+  }
+
+  Future<void> _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -144,6 +154,27 @@ class _ProductDetailState extends State<ProductDetail> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 10, width: 28), // Jarak antar bagian
+
+                  // Tambahkan bagian Lihat Rincian Biaya
+                  Padding(
+                    padding: const EdgeInsets.only(left: 29.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        _launchURL(
+                            "https://drive.google.com/file/d/1rMJ0mUN2Y4Esriz3Xkbd4fH-Kq8BwuDE/view?usp=drive_link");
+                      },
+                      child: Text(
+                        "Lihat Rincian Biaya",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          //decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -210,8 +241,13 @@ class _ProductDetailState extends State<ProductDetail> {
                     ),
                   ),
                   onPressed: () {
-                    // Aksi saat tombol chat ditekan
-                    // Tambahkan logika di sini
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ChatPage(), // Ganti dengan nama kelas halaman chat
+                      ),
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

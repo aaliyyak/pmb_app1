@@ -4,12 +4,20 @@ import 'package:pmb_app/pages/onboarding_page.dart';
 import 'package:pmb_app/themes/themes.dart';
 
 class RegistPage extends StatefulWidget {
+  const RegistPage({super.key});
+
   @override
   _RegistPageState createState() => _RegistPageState();
 }
 
 class _RegistPageState extends State<RegistPage> {
   DateTime? _selectedDate;
+  String? _selectedGender; // Ubah menjadi nullable
+  final List<String?> _genders = [
+    null,
+    'Perempuan',
+    'Laki-laki'
+  ]; // Menambahkan opsi kosong
   Color _masukTextColor = pinkTextstyle.color!; // Warna awal untuk teks "Masuk"
 
   // Fungsi untuk menampilkan date picker
@@ -189,7 +197,28 @@ class _RegistPageState extends State<RegistPage> {
               Container(
                 width: double.infinity,
                 height: 45,
-                child: TextField(
+                child: DropdownButtonFormField<String?>(
+                  value: _selectedGender,
+                  items: _genders.map((
+                    String? gender,
+                  ) {
+                    return DropdownMenuItem<String?>(
+                      value: gender,
+                      child: Text(
+                        gender ?? 'Pilih Jenis Kelamin',
+                        style: TextStyle(
+                          color: gender == _selectedGender
+                              ? Colors.black
+                              : Colors.grey[700],
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedGender = newValue;
+                    });
+                  },
                   decoration: InputDecoration(
                     hintText: 'Jenis Kelamin',
                     hintStyle: TextStyle(color: Colors.grey[700]),
@@ -204,9 +233,8 @@ class _RegistPageState extends State<RegistPage> {
                       borderSide: BorderSide(color: blueColor),
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   ),
-                  style: TextStyle(color: Colors.black),
                 ),
               ),
               SizedBox(height: 10),
@@ -267,52 +295,51 @@ class _RegistPageState extends State<RegistPage> {
                     foregroundColor: primaryColor,
                     backgroundColor: primaryColor,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OnboardingPage()));
+                      context,
+                      MaterialPageRoute(builder: (context) => OnboardingPage()),
+                    );
                   },
-                  child: Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                    child: Text(
-                      'REGISTRASI',
-                      style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  child: Text(
+                    'Daftar',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Sudah punya akun?",
-                    style: blackTextstyle,
+                    'Sudah punya akun? ',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        _masukTextColor = Colors
-                            .grey; // Ubah warna teks "Masuk" menjadi abu-abu
+                        _masukTextColor =
+                            blueColor; // Mengubah warna teks saat di-klik
                       });
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LoginScreen()));
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
                     },
                     child: Text(
-                      " Masuk",
+                      'Masuk',
                       style: TextStyle(
                         color: _masukTextColor,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

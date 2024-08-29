@@ -178,7 +178,26 @@ class CartPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DaftarNowPage(),
+                    builder: (context) => DaftarNowPage(
+                      nama: '',
+                      jenjang: '',
+                      imageUrl: '',
+                      biayaUKT: '',
+                      namaLengkap: '',
+                      tempatLahir: '',
+                      tanggalLahir: '',
+                      alamat: '',
+                      namaSekolah: '',
+                      jurusan: '',
+                      tahunLulus: '',
+                      pilihanKelas: '',
+                      ukJaket: '',
+                      noHp: '',
+                      email: '',
+                      namaOrtu: '',
+                      penghasilan: '',
+                      pekerjaanOrtu: '',
+                    ),
                   ),
                 );
                 //fungsi navigasi

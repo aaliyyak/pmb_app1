@@ -51,6 +51,7 @@ class _PengaturanPageState extends State<PengaturanPage> {
           'Pengaturan akun',
           style: TextStyle(color: Colors.black),
         ),
+        centerTitle: true,
       ),
       backgroundColor: Colors.grey[300],
       body: Padding(
@@ -71,19 +72,17 @@ class _PengaturanPageState extends State<PengaturanPage> {
                   bottom: 0,
                   right: 0,
                   child: Container(
-                    width: 30, // Lebar container
-                    height: 30, // Tinggi container
+                    width: 30,
+                    height: 30,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.black.withOpacity(
-                          0.3), // Background semi-transparan untuk ikon
+                      color: Colors.black.withOpacity(0.3),
                     ),
                     child: IconButton(
                       icon: Icon(Icons.photo_camera,
-                          color: Colors.black, size: 16), // Ukuran ikon
+                          color: Colors.black, size: 16),
                       onPressed: _pickImage,
-                      padding: EdgeInsets
-                          .zero, // Menghapus padding default IconButton
+                      padding: EdgeInsets.zero,
                     ),
                   ),
                 ),
@@ -144,7 +143,7 @@ class _PengaturanPageState extends State<PengaturanPage> {
                 // Action for save button
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: primaryColor, // Ganti dengan primaryColor Anda
+                backgroundColor: primaryColor, // Warna biru sebagai contoh
                 minimumSize: Size(double.infinity, 50),
               ),
               child: Text(

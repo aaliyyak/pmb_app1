@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pmb_app/pages/beasiswa.dart';
 import 'package:pmb_app/pages/biro.dart';
 import 'package:pmb_app/pages/organisasi.dart';
-import 'package:pmb_app/pages/tour_page.dart'; // Pastikan untuk mengimpor halaman tour.dart
 import 'package:pmb_app/themes/themes.dart';
 
 class UIGMPage extends StatefulWidget {
@@ -37,26 +36,26 @@ class _UIGMPageState extends State<UIGMPage>
 
   Offset position = Offset(20, 20);
 
+  bool showImage = true; // Menyimpan status apakah gambar ditampilkan
+
   @override
   void initState() {
     super.initState();
-    // Inisialisasi AnimationController dengan durasi 2 detik
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(seconds: 2),
     )..repeat(reverse: true);
-    // Menggunakan Tween untuk membuat animasi dengan efek bounce
+
     _animation = Tween<double>(begin: 0, end: 20).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Curves.bounceInOut, // Menggunakan curve bounce
+        curve: Curves.bounceInOut,
       ),
     );
   }
 
   @override
   void dispose() {
-    // Dispose AnimationController saat halaman dihancurkan
     _animationController.dispose();
     super.dispose();
   }
@@ -251,76 +250,111 @@ class _UIGMPageState extends State<UIGMPage>
               ],
             ),
           ),
-          Positioned(
-            top: position.dy,
-            left: position.dx,
-            child: Draggable(
-              feedback: Container(
-                width: 140,
-                height: 110,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.transparent,
-                      blurRadius: 1,
-                      offset: Offset(2, 2),
-                    ),
-                  ],
-                ),
-                child: ClipOval(
-                  child: Image.asset(
-                    'assets/vtt.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              childWhenDragging: Container(
-                width: 140,
-                height: 110,
-              ),
-              onDragEnd: (details) {
-                setState(() {
-                  position = details.offset;
-                });
-              },
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TourPage()),
-                  );
-                },
-                child: AnimatedBuilder(
-                  animation: _animation,
-                  builder: (context, child) {
-                    return Transform.translate(
-                      offset: Offset(0, _animation.value), // Efek bounce
-                      child: child,
-                    );
-                  },
-                  child: Container(
-                    width: 140,
-                    height: 110,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.transparent,
-                          blurRadius: 1,
-                          offset: Offset(2, 2),
+          showImage
+              ? Positioned(
+                  top: position.dy,
+                  left: position.dx,
+                  child: Draggable(
+                    feedback: Stack(
+                      children: [
+                        Container(
+                          width: 140,
+                          height: 110,
+                          decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.transparent,
+                                blurRadius: 1,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
+                          ),
+                          child: ClipOval(
+                            child: Image.asset(
+                              'assets/vtt.png',
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 4,
+                          right: 4,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                showImage = false; // Menghapus gambar
+                              });
+                            },
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.red,
+                              size: 20,
+                            ),
+                          ),
                         ),
                       ],
                     ),
-                    child: ClipOval(
-                      child: Image.asset(
-                        'assets/vtt.png',
-                        fit: BoxFit.cover,
-                      ),
+                    childWhenDragging: Container(
+                      width: 140,
+                      height: 110,
+                    ),
+                    onDragEnd: (details) {
+                      setState(() {
+                        position = details.offset;
+                      });
+                    },
+                    child: Stack(
+                      children: [
+                        AnimatedBuilder(
+                          animation: _animation,
+                          builder: (context, child) {
+                            return Transform.translate(
+                              offset: Offset(0, _animation.value),
+                              child: child,
+                            );
+                          },
+                          child: Container(
+                            width: 140,
+                            height: 110,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.transparent,
+                                  blurRadius: 1,
+                                  offset: Offset(2, 2),
+                                ),
+                              ],
+                            ),
+                            child: ClipOval(
+                              child: Image.asset(
+                                'assets/vtt.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 4,
+                          right: 4,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                showImage = false; // Menghapus gambar
+                              });
+                            },
+                            child: Icon(
+                              Icons.close,
+                              color: Colors.red,
+                              size: 20,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ),
-            ),
-          ),
+                )
+              : SizedBox
+                  .shrink(), // Tidak menampilkan apapun jika gambar tidak ada
         ],
       ),
     );

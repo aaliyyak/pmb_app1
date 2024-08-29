@@ -54,6 +54,12 @@ dev_dependencies:
   rive: ^0.13.12
   url_launcher: ^6.0.20
   open_file: ^3.3.2
+  intl: ^0.18.1
+  get: ^4.6.6
+  # untuk membaca format html
+  flutter_widget_from_html: ^0.8.5
+  http: ^1.2.2
+  sp_util: ^2.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
