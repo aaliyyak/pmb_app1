@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:pmb_app/pages/agenda_page.dart';
+//import 'package:pmb_app/pages/elearning.dart';
 import 'package:pmb_app/pages/notif.dart';
 import 'package:pmb_app/pages/pmb_page.dart';
 import 'package:pmb_app/pages/profil_page.dart';
 import 'package:pmb_app/pages/riwayat_page.dart';
+//import 'package:pmb_app/pages/students.dart';
 import 'package:pmb_app/pages/uigm_page.dart';
 
 import '../themes/themes.dart';
@@ -35,6 +38,14 @@ class _HomePageState extends State<HomePage> {
     Colors.black,
     Colors.black,
   ];
+
+  Future<void> _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   void initState() {
@@ -110,7 +121,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Color(0xff0d3559),
         elevation: 0,
         centerTitle: true,
-        toolbarHeight: 35,
+        toolbarHeight: 20,
         shape: ContinuousRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomRight: Radius.circular(0), // Sudut kanan
@@ -126,11 +137,11 @@ class _HomePageState extends State<HomePage> {
                 decoration: BoxDecoration(
                   color: Color(0xff0d3559),
                   borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.elliptical(95, 150),
-                    bottomRight: Radius.elliptical(600, 250),
+                    bottomLeft: Radius.elliptical(220, 105),
+                    bottomRight: Radius.elliptical(630, 320),
                   ),
                 ),
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -194,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                           fillColor: Colors.white,
                           prefixIcon: Icon(Icons.search, color: Colors.grey),
                           contentPadding:
-                              EdgeInsets.symmetric(vertical: 1, horizontal: 8),
+                              EdgeInsets.symmetric(vertical: 1, horizontal: 20),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
                             borderSide: BorderSide.none,
@@ -210,26 +221,47 @@ class _HomePageState extends State<HomePage> {
                           _buildFeatureCard(
                             context,
                             'UIGM',
-                            'Info fasilitas\nUniversitas',
-                            'assets/build.jpg', // Updated
+                            'Info Kampus',
+                            'assets/build.jpg',
                             40,
-                            UIGMPage(),
+                            UIGMPage(), // Navigates to UIGMPage
+                            null, // No URL
                           ),
                           _buildFeatureCard(
                             context,
                             'Agenda',
-                            'Jadwal\nPendaftaran',
-                            'assets/genda.jpg', // Updated
+                            'Jadwal kegiatan',
+                            'assets/genda.jpg',
                             40,
-                            AgendaPage(),
+                            AgendaPage(), // Navigates to AgendaPage
+                            null, // No URL
                           ),
                           _buildFeatureCard(
                             context,
                             'PMB',
-                            'Daftar Jadi\nMahasiswa',
-                            'assets/minmin.jpg', // Updated
-                            45,
-                            PmbPage(),
+                            'Daftar Sekarang',
+                            'assets/minmin.jpg',
+                            42,
+                            PmbPage(), // Navigates to PmbPage
+                            null, // No URL
+                          ),
+                          _buildFeatureCard(
+                            context,
+                            'Vclass',
+                            'E-learning Class',
+                            'assets/webinar.png',
+                            40,
+                            null, // No targetPage, so use onTap
+                            () => _launchURL('https://vclass.uigm.ac.id/'),
+                          ),
+                          _buildFeatureCard(
+                            context,
+                            'Student',
+                            'portal student',
+                            'assets/education.png',
+                            40,
+                            null, // No targetPage, so use onTap
+                            () => _launchURL('https://student.uigm.ac.id/'),
                           ),
                         ],
                       ),
@@ -302,11 +334,11 @@ class _HomePageState extends State<HomePage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, size: 25, color: _iconColors[index]),
+        Icon(icon, size: 23, color: _iconColors[index]),
         Text(
           label,
           style: TextStyle(
-            fontSize: 9,
+            fontSize: 8,
             color: _iconColors[index],
           ),
         ),
@@ -314,37 +346,41 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildFeatureCard(BuildContext context, String title, String subtitle,
-      String imagePath, double iconSize, Widget targetPage) {
+  Widget _buildFeatureCard(
+    BuildContext context,
+    String title,
+    String subtitle,
+    String imagePath,
+    double iconSize,
+    Widget? targetPage, // Set targetPage as nullable
+    Function()? onTap, // Set onTap as a Function
+  ) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => targetPage),
-        );
-      },
+      onTap: targetPage != null
+          ? () => Navigator.push(
+              context, MaterialPageRoute(builder: (context) => targetPage))
+          : onTap, // If targetPage is null, use the onTap function
       child: Container(
-        width: 96,
+        width: 68,
         child: Card(
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(8),
             child: Column(
               children: [
                 ClipRRect(
-                  borderRadius:
-                      BorderRadius.circular(10.0), // Border radius here
+                  borderRadius: BorderRadius.circular(5.0),
                   child: Image.asset(
                     imagePath,
                     width: iconSize,
                     height: iconSize,
-                    fit: BoxFit.cover, // Ensures the image covers the area
+                    fit: BoxFit.cover,
                   ),
                 ),
                 SizedBox(height: 5),
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -353,8 +389,8 @@ class _HomePageState extends State<HomePage> {
                   subtitle,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 10,
                     color: Colors.grey,
+                    fontSize: 9,
                   ),
                 ),
               ],
@@ -367,7 +403,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildImageSlider() {
     return Container(
-      height: 133,
+      height: 125,
       child: PageView.builder(
         controller: _pageController,
         itemCount: _images.length,
@@ -428,26 +464,26 @@ class _HomePageState extends State<HomePage> {
       },
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.only(top: 1),
+          padding: const EdgeInsets.only(top: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 125, // Set the desired height for the image container
+                height: 105, // Set the desired height for the image container
                 child: ClipRRect(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0),
+                    topLeft: Radius.circular(8.0),
+                    topRight: Radius.circular(8.0),
                   ),
                   child: Image.asset(
                     imagePath,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
+                    fit: BoxFit.fill,
+                    width: double.maxFinite,
                   ),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10),
+                padding: EdgeInsets.all(8),
                 child: RichText(
                   text: TextSpan(
                     style: TextStyle(fontSize: 12, color: Colors.black),
@@ -485,8 +521,10 @@ class _HomePageState extends State<HomePage> {
                 alignment: Alignment.centerRight,
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      right: 20,
-                      bottom: 6), // Adjust the padding values as needed
+                    right: 20,
+                    bottom: 5,
+                    top: 1,
+                  ), // Adjust the padding values as needed
                   child: Text(
                     buttonText,
                     style: TextStyle(

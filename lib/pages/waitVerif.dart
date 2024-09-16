@@ -114,7 +114,7 @@ class VerifPage extends StatelessWidget {
                                   height: 2,
                                 ),
                                 Text(
-                                  "10 September 2023, 18:25",
+                                  "10 September 2021, 18:25",
                                   style: TextStyle(color: Colors.grey),
                                 ),
                               ],

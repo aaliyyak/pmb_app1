@@ -87,7 +87,7 @@ class DaftarUlangPage extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '- Rp 400.000 ',
+                        '- Rp 7.500.000 ',
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
@@ -102,7 +102,7 @@ class DaftarUlangPage extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '- Rp 500.000 ',
+                        '- Rp 8.500.000 ',
                         style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,
